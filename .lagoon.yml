@@ -24,6 +24,5 @@ environments:
     routes:
       - nginx:
         - example.lagoon.fubarhouse.io:
-            tls-acme: 'false'
-            annotations:
-              nginx.ingress.kubernetes.io/ssl-redirect: "false"
+            tls-acme: 'true'
+
