@@ -23,10 +23,7 @@ environments:
   main:
     routes:
       - nginx:
-        - dafkv9e6232h8.cloudfront.net:
-            tls-acme: false
-            insecure: Allow
         - example.lagoon.fubarhouse.io:
-            tls-acme: true
+            tls-acme: false
             insecure: Allow
 
