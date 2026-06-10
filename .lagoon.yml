@@ -24,6 +24,6 @@ environments:
     routes:
       - nginx:
         - example.lagoon.fubarhouse.io:
-            tls-acme: false
+            tls-acme: true
             insecure: Allow
 
