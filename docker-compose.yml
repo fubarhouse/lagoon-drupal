@@ -8,7 +8,7 @@ x-volumes:
 x-environment:
   &default-environment
     # Route that should be used locally, if you are using pygmy, this route *must* end with .docker.amazee.io
-    LAGOON_ROUTE: &default-url http://${COMPOSE_PROJECT_NAME:-drupal-base}.docker.amazee.io
+    LAGOON_ROUTE: &default-url https://${COMPOSE_PROJECT_NAME:-drupal-base}.docker.amazee.io
     # Uncomment if you like to have the system behave like in production
     #LAGOON_ENVIRONMENT_TYPE: production
     # Uncomment to enable xdebug and then restart via `docker-compose up -d`
@@ -23,6 +23,8 @@ volumes:
   files:
     {}
   db:
+    {}
+  solr:
     {}
 
 services:
@@ -100,6 +102,19 @@ services:
       << : *default-environment
     volumes:
       - db:/var/lib/mysql
+
+  solr:
+    image: uselagoon/solr-8-drupal:latest
+    labels:
+      lagoon.type: solr
+      lando.type: solr-drupal
+    ports:
+      - "8983" # exposes the port 8983 with a random local port, find it with `docker-compose port solr 8983`
+    << : *default-user
+    environment:
+      << : *default-environment
+    volumes:
+      - solr:/var/solr
 
 networks:
   amazeeio-network:
